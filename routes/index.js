@@ -11,9 +11,13 @@ module.exports = function(app, dbs) {
     })
   })
 
-  app.get('/staging', (req, res) => {
+  app.post('/staging', (req, res) => {
     if(req.body.result.action && req.body.result.action == "order.entertainment") {
       res.send("aaaaaaaaaaaaaaaaaaaaaaaaa dsdsds")
+    }
+    else {
+      res.status(422).send({error : "phèo lơ rồi"})
+    }
     }
     // dbs.staging.collection('drinktbl').find({}).toArray((err, docs) => {
     //   if (err) {
