@@ -18,6 +18,7 @@
   "homepage": "https://github.com/quangnguyend/coffeeshop#readme",
   "dependencies": {
     "express": "^4.15.2",
-    "mongodb": "^3.0.4"
+    "mongodb": "^3.0.4",
+    "weather-js": "^2.0.0"
   }
 }

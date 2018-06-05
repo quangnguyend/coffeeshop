@@ -1,3 +1,4 @@
+var weather = require('weather-js');
 module.exports = function(app, dbs) {
 
   app.get('/production', (req, res) => {
@@ -13,9 +14,15 @@ module.exports = function(app, dbs) {
 
   app.post('/', (req, res) => {
     if(req.body.result.action && req.body.result.action == "order.entertainment") {
+      //let { entertainment, geoCity } = req.body.parameters;
+      // weather.find({search: "Ho Chi Minh", degreeType: 'F'}, function(err, result) {
+      //   if(err) console.log(err);
+       
+      //   console.log(result[]);
+      // });
       res.json({
         speech: 'Something went wrong!',
-        displayText: 'Something went wrong!',
+        displayText: 'Current: 20\n\nTomoroow:30',
         source: 'team info'
     });
     }
