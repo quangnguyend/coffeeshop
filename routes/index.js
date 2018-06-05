@@ -11,7 +11,7 @@ module.exports = function(app, dbs) {
     })
   })
 
-  app.post('/staging', (req, res) => {
+  app.post('/', (req, res) => {
     if(req.body.result.action && req.body.result.action == "order.entertainment") {
       res.send("aaaaaaaaaaaaaaaaaaaaaaaaa dsdsds")
     }
