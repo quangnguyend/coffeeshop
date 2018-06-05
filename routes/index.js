@@ -18,7 +18,6 @@ module.exports = function(app, dbs) {
     else {
       res.status(422).send({error : "phèo lơ rồi"})
     }
-    }
     // dbs.staging.collection('drinktbl').find({}).toArray((err, docs) => {
     //   if (err) {
     //     console.log(err)
