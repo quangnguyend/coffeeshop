@@ -13,7 +13,11 @@ module.exports = function(app, dbs) {
 
   app.post('/', (req, res) => {
     if(req.body.result.action && req.body.result.action == "order.entertainment") {
-      res.send("aaaaaaaaaaaaaaaaaaaaaaaaa dsdsds")
+      res.json({
+        speech: 'Something went wrong!',
+        displayText: 'Something went wrong!',
+        source: 'team info'
+    });
     }
     else {
       res.status(422).send({error : "phèo lơ rồi"})
