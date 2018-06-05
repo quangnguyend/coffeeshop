@@ -1,1 +1,1 @@
-worker: node workers/match.js
+worker:node workers/match.js
