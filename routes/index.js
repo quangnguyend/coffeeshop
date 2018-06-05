@@ -12,14 +12,17 @@ module.exports = function(app, dbs) {
   })
 
   app.get('/staging', (req, res) => {
-    dbs.staging.collection('drinktbl').find({}).toArray((err, docs) => {
-      if (err) {
-        console.log(err)
-        res.error(err)
-      } else {
-        res.json(docs)
-      }
-    })
+    if(req.body.result.action && req.body.result.action == "order.entertainment") {
+      res.send("aaaaaaaaaaaaaaaaaaaaaaaaa dsdsds")
+    }
+    // dbs.staging.collection('drinktbl').find({}).toArray((err, docs) => {
+    //   if (err) {
+    //     console.log(err)
+    //     res.error(err)
+    //   } else {
+    //     res.json(docs)
+    //   }
+    // })
   })
 
   // app.post('/staging', (req, res) => {
