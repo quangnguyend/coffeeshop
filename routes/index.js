@@ -1,4 +1,5 @@
-var weather = require('weather-js');
+let ctrWeather = require('../controllers/weather');
+let ctrDistance = require('../controllers/distance');
 module.exports = function(app, dbs) {
 
   app.get('/production', (req, res) => {
@@ -13,21 +14,27 @@ module.exports = function(app, dbs) {
   })
 
   app.post('/', (req, res) => {
-    if(req.body.result.action && req.body.result.action == "order.entertainment") {
-      //let { entertainment, geoCity } = req.body.parameters;
-      // weather.find({search: "Ho Chi Minh", degreeType: 'F'}, function(err, result) {
-      //   if(err) console.log(err);
-       
-      //   console.log(result[]);
-      // });
-      res.json({
-        speech: 'Something went wrong!',
-        displayText: 'Current: 20\n\nTomoroow:30',
-        source: 'team info'
-    });
+    let objRs = {
+      speech: 'Something went wrong!',
+      displayText: 'Something went wrong!',
+      source: 'S3corp.com.vn'
     }
-    else {
-      res.status(422).send({error : "phèo lơ rồi"})
+    if(!req.body.result && !req.body.result.action) {
+      return res.json(objRs);
+    }
+    let { action, parameters } = req.body.result;
+    switch(action) {
+      case "order.entertainment":
+        if(parameters.entertainment === "weather") {
+          ctrWeather.getWeather(parameters.geoCity, res);
+        }
+        if(parameters.entertainment === "distance") {
+          ctrWeather.getDistance(parameters.geoCity, res);
+        }
+        break;
+      default:
+        return res.json(objRs);
+        break;
     }
     // dbs.staging.collection('drinktbl').find({}).toArray((err, docs) => {
     //   if (err) {
@@ -37,19 +44,6 @@ module.exports = function(app, dbs) {
     //     res.json(docs)
     //   }
     // })
-  })
-
-  // app.post('/staging', (req, res) => {
-  //   dbs.staging.collection('drinktbl').insert()
-  //   dbs.staging.collection('drinktbl').find({}).toArray((err, docs) => {
-  //     if (err) {
-  //       console.log(err)
-  //       res.error(err)
-  //     } else {
-  //       res.json(docs)
-  //     }
-  //   })
-  // })
-
+  });
   return app
 }
