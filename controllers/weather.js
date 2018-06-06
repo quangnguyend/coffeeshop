@@ -6,7 +6,11 @@ module.exports = {
             let objWeather = result[0].current;
             let respond = objWeather.observationpoint + " - temperature: " + objWeather.temperature;
             respond += " - windspeed: " + objWeather.windspeed + "- humidity:" + objWeather.humidity;
-            console.log(respond);
+            return res.send({
+                speech: respond,
+                displayText: 'Something went wrong!',
+                source: 'S3corp.com.vn'
+              });
         });
     }
 };
