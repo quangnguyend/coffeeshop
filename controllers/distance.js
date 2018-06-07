@@ -1,11 +1,29 @@
-var distance = require('google-distance');
-var weather = require('weather-js');
+var distance = require("map-distance")
 module.exports = {
     getDistance: (place, res) => {
-        weather.find({search: place, degreeType: 'F'}, function(err, result) {
-            if(err) console.log(err);
-           
-            console.log(JSON.stringify(result, null, 2));
-        });
+        let {geoCity, geoCityTo} = place;
+        distance({
+            from: geoCity,
+            to: geoCityTo,
+            mode: 'driving'
+          }, 
+          function (err, data){
+                if(data) {
+                    let km = parseInt(data.meters) / 1000;
+                    respond = geoCity + " to " + geoCityTo + " is: " + km + " km"
+                    return res.send({
+                        speech: respond,
+                        displayText: 'Something went wrong!',
+                        source: 'S3corp.com.vn'
+                    });
+              }
+              return res.send({
+                speech: "Can not find you located",
+                displayText: 'Something went wrong!',
+                source: 'S3corp.com.vn'
+              });
+
+            console.log(data)
+          })
     }
 };

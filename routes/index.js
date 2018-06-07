@@ -29,7 +29,7 @@ module.exports = function(app, dbs) {
           ctrWeather.getWeather(parameters.geoCity, res);
         }
         if(parameters.entertainment === "distance") {
-          ctrWeather.getDistance(parameters.geoCity, res);
+          ctrDistance.getDistance(parameters, res);
         }
         break;
       default:
